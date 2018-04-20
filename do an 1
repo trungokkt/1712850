@@ -97,7 +97,35 @@ wchar_t* duongdanhtml(SV sv)
 	wcscat(tenweb, duoifile);
 	return tenweb;
 }
+//wchar_t* chenvao(wchar_t cantim[], wchar_t chuoicha[], wchar_t chuoichen[]){
+//	wchar_t gep1[300];
+//	wchar_t* gep2;
+//	gep2 = wcsstr(chuoicha, cantim);
+//	int n = wcslen(chuoicha) - wcslen(gep2);
+//	wcsncpy(gep1, chuoicha, n);
+//	gep1[n] = L'\0';
+//	wcscat(chuoichen, gep2 + wcslen(cantim));
+//	wcscat(gep1, chuoichen);
+//	return gep1;
+//}
+void chenvao(wchar_t cantim[], wchar_t chuoicha[], wchar_t chuoichen[]){
+	wchar_t gep1[200];
+	wchar_t* gep2;
+	chuoicha = wcsstr(chuoicha, cantim);
+	int n = wcslen(chuoicha) - wcslen(chuoicha);
+	wcsncpy(gep1, chuoicha, n);
+	gep1[n] = L'\0';
+	wcscat(chuoichen, chuoicha + wcslen(cantim));
+	wcscat(gep1, chuoichen);
+	wcscpy(chuoicha, gep1);
+	
+}
+void chenso(wchar_t cantim[], wchar_t chuoicha[], int so){
+
+}
 void timvachen(wchar_t c[],SV sv){
+	wchar_t*e,*f,*g,*h,*k,*i,*l,*m;
+	wchar_t tenhoa[30] = L"NGUYỄN VĂN A";
 	wchar_t ten[30] = L"Nguyễn Văn A";
 	wchar_t mssv[10] = L"1212123";
 	wchar_t major[30]=L"Công nghệ thông tin";
@@ -107,16 +135,46 @@ void timvachen(wchar_t c[],SV sv){
 	wchar_t desc[1000]=L"Tôi là một người rất thân thiện.";
 	wchar_t hobby1[100]=L"Âm nhạc: POP, Balad";
 	wchar_t hobby2[100] =L"Ẩm thực: bún riêu, bún thịt nướng";
-	for int()
-	
+	e = wcsstr(c, ten);
+	if (e != 0){
+		chenvao(ten, c, sv.hoten);
+	}
+	m = wcsstr(c, tenhoa);
+	if (m != 0){
+		chenvao(tenhoa, c, wcsupr(sv.hoten));
+	}
+	f = wcsstr(c, mssv);
+	if (f != 0){
+		chenvao(mssv, c, sv.mssv);
+	}
+	g = wcsstr(c, major);
+	if (g != 0){
+		chenvao(major, c, sv.major);
+	}
+	//h = wcsstr(c, khoa);
+	//if (h != 0){
+	//	chenvao(ten, c, sv.khoa);
+	//}
+	i = wcsstr(c, birth);
+	if (i != 0){
+		chenvao(birth, c, sv.birth);
+	}
+	k = wcsstr(c, JPG);
+	if (k != 0){
+		chenvao(JPG, c, sv.JPG);
+	}
+	l = wcsstr(c, desc);
+	if (l != 0){
+		chenvao(desc, c, sv.desc);
+	}
 }
 void xuatnoidungvaohtml(FILE* fDefault, FILE*csv, SV &sv){
 	rewind(fDefault);
 	wchar_t c[500];
 	while (!feof(fDefault)){
 		fgetws(c, 500, fDefault);
-		
-		
+		timvachen(c, sv);
+		fputws(c, csv);
 	}
 	fclose(csv);
 }
@@ -138,20 +196,20 @@ void main()
 		}
 	}
 	int i = 0;
-	wchar_t *tenweb = static_cast<wchar_t*>(malloc(50 * sizeof(wchar_t)));
+	wchar_t *tenweb;
 	FILE *fDefault = _wfopen(L"Default.html", L"r, ccs=UTF-8");
 	if (!fDefault)
 		wprintf(L"Không thể đọc .file \n");
 	else{
 		while (i < 10){
-			
-			tenweb= duongdanhtml(sv[i]);
+
+			tenweb = duongdanhtml(sv[i]);
 			FILE *fweb = _wfopen(tenweb, L"wt, ccs=UTF-8");
 			if (!fweb)
 				wprintf(L"Không thể mở file \n");
 			else
 				xuatnoidungvaohtml(fDefault, fweb, sv[i]);
-				i++;
+			i++;
 		}
 	}
 	fclose(fin);
