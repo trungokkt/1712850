@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <fcntl.h> 
 #include <io.h>   
+#include <stdlib.h>
 #include <string.h>
 #include <codecvt> 
 #include <fstream>
@@ -20,19 +21,19 @@ typedef struct SinhVien
 	wchar_t hobby[10][200];
 	int x;
 }SV;
-//int demnguoi(FILE* fin)
-//{
-//	int dem = 0;
-//	wchar_t c;
-//	while (1) {
-//		c = fgetwc(fin);
-//		if (c == L'\n')
-//			dem++;
-//		if (c == 65535)
-//			break;
-//	}
-//	return dem;
-//}
+int demnguoi(FILE* fin)
+{
+	int dem = 0;
+	wchar_t c;
+	while (feof(fin)) 
+	{
+		c = fgetwc(fin);
+		if (c == L'\n')
+			dem++;
+
+	}
+	return dem;
+}
 void tachkhoahoc(FILE* fin, int &s){
 	fseek(fin, 2L, SEEK_CUR);
 	fwscanf(fin, L"%d", &s);
@@ -88,17 +89,37 @@ void GanNoiDung(FILE* fin, SV &sv){
 		tachnoidung(fin, sv.hobby[i]);
 	}
 }
-//wchar_t duongdanhtml(SV sv)
-//{
-//	wchar_t tenweb[] = L"Websites\\";
-//	wchar_t duoifile[50] = L".html";
-//	wcscat(tenweb, sv.mssv);
-//	wcscat(tenweb, duoifile);
-//	return tenweb;
-//}
-//void xuatnoidungvaohtml(FILE* fDefault,FILE*sinhvien ,SV &sv){
-//	wchar_t
-//}
+wchar_t* duongdanhtml(SV sv)
+{
+	wchar_t tenweb[50] = L"Websites\\";
+	wchar_t duoifile[50] = L".html";
+	wcscat(tenweb, sv.mssv);
+	wcscat(tenweb, duoifile);
+	return tenweb;
+}
+void timvachen(wchar_t c[],SV sv){
+	wchar_t ten[30] = L"Nguyễn Văn A";
+	wchar_t mssv[10] = L"1212123";
+	wchar_t major[30]=L"Công nghệ thông tin";
+	wchar_t khoa[10] = L"2012";
+	wchar_t birth[20]=L"20/01/1994";
+	wchar_t JPG[100]=L"HinhCaNhan.jpg";
+	wchar_t desc[1000]=L"Tôi là một người rất thân thiện.";
+	wchar_t hobby1[100]=L"Âm nhạc: POP, Balad";
+	wchar_t hobby2[100] =L"Ẩm thực: bún riêu, bún thịt nướng";
+	for int()
+	
+}
+void xuatnoidungvaohtml(FILE* fDefault, FILE*csv, SV &sv){
+	rewind(fDefault);
+	wchar_t c[500];
+	while (!feof(fDefault)){
+		fgetws(c, 500, fDefault);
+		
+		
+	}
+	fclose(csv);
+}
 void main()
 {
 	_setmode(_fileno(stdout), _O_U16TEXT); 
@@ -116,19 +137,23 @@ void main()
 			GanNoiDung(fin, sv[k]);
 		}
 	}
+	int i = 0;
+	wchar_t *tenweb = static_cast<wchar_t*>(malloc(50 * sizeof(wchar_t)));
+	FILE *fDefault = _wfopen(L"Default.html", L"r, ccs=UTF-8");
+	if (!fDefault)
+		wprintf(L"Không thể đọc .file \n");
+	else{
+		while (i < 10){
+			
+			tenweb= duongdanhtml(sv[i]);
+			FILE *fweb = _wfopen(tenweb, L"wt, ccs=UTF-8");
+			if (!fweb)
+				wprintf(L"Không thể mở file \n");
+			else
+				xuatnoidungvaohtml(fDefault, fweb, sv[i]);
+				i++;
+		}
+	}
 	fclose(fin);
-	//int i = 0;
-	//FILE *fDefault = _wfopen(L"Websites\\Default.html", L"r, ccs=UTF-8");
-	//if (!fDefault)
-	//	wprintf(L"Không thể đọc file \n");
-	//else{
-	//	while (i < 10){
-	//		wchar_t tenweb[50] = duongdanhtml(sv[i]);
-	//		FILE *fweb = _wfopen(tenweb, L"w, ccs=UTF-8");
-	//		if (!fDefault)
-	//			wprintf(L"Không thể mở file \n");
-
-	//	}
-	//
-	//}
+	
 }
