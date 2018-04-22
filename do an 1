@@ -56,18 +56,18 @@ void tachnoidung(FILE* fin, wchar_t noidung[]){
 int demsothich(FILE*fin){
 	int dem = 0;
 	wchar_t c;
-	while (1){
+	while (!feof(fin)){
 		c = fgetwc(fin);
 		if (c == L'"')
 			dem++;
-		if (c == '\n'||c == EOF)
+		if (c == '\n')
 			break;
 	}
 	return (dem / 2) - 7;
 }
-void sothichmoinguoi(FILE* fin, SV sv[10])
+void sothichmoinguoi(FILE* fin, SV sv[], int n)
 {
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < n; i++)
 	{
 		sv[i].x = demsothich(fin);
 	}
@@ -211,7 +211,7 @@ void main()
 	else{
 		soSV = demnguoi(fin);
 
-		sothichmoinguoi(fin, sv);
+		sothichmoinguoi(fin, sv,soSV);
 		fseek(fin, 1L, SEEK_CUR);
 		for (k = 0; k < soSV; k++){
 			fseek(fin, 1L, SEEK_CUR);
@@ -235,5 +235,4 @@ void main()
 		}
 	}
 	fclose(fin);
-	
 }
