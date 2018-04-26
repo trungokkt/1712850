@@ -143,7 +143,7 @@ void timvachen(wchar_t c[],SV sv){
 	wchar_t*e,*f,*g,*h,*k,*i,*l,*mail,*hoddys;
 	wchar_t EMAIL[30] = L"EMAIL";
 	wchar_t ten[30] = L"TÊN";
-	wchar_t mssv[10] = L"MSSV";
+	wchar_t mssv[10] = L"MSHSSV";
 	wchar_t major[30]=L"MAJOR";
 	wchar_t birth[20]=L"NGÀY SINH";
 	wchar_t JPG[100]=L"HINHANH";
@@ -232,7 +232,9 @@ void main()
 			else
 				xuatnoidungvaohtml(fDefault, fweb, sv[i]);
 			i++;
+			fclose(fweb);
 		}
 	}
+	fclose(fDefault);
 	fclose(fin);
 }
