@@ -1,3 +1,37 @@
+QInt::QInt()
+{
+}
+
+//Hàm khỏi tạo bằng cách truyền vào chuỗi bit nhị phân.
+QInt::QInt(const string &Binary)
+{
+	memset(this->m_Data, 0, _DEFAULT_SIZE);
+	for (size_t i = 0; i < Binary.size(); i++)
+	{
+		if (Binary[i] == '1')
+		{
+			this->m_Data[_POSITION] = this->m_Data[_POSITION] | (1 << _SHIFT_OFFSET);
+		}
+	}
+}
+
+//Hàm hủy dữ liệu của kiểu QInt (Không có xử lý gì đặc biệt).
+QInt::~QInt()
+{
+}
+
+//---------------------------------NHÓM HÀM GET, SET---------------------------------
+//Hàm lấy data .
+int* QInt::getData()
+{
+	return this->m_Data;
+}
+////Hàm lấy size
+int QInt::size()
+{
+	return _DEFAULT_SIZE / _SIZE_INT_;
+}
+
 //Toán tử gán =.
 QInt QInt::operator = (QInt x)
 {
