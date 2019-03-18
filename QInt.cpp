@@ -193,15 +193,36 @@ bool QInt::operator == (QInt x) {
 }
 //Toán tử <.
 bool  QInt::operator < (QInt x) {
-	if (this != &x)
-	{
-		for (int i = 0; i < x.size(); i++)
+	if (this->isNegative() && !x.isNegative())
+		return true;
+	if (!this->isNegative() && x.isNegative())
+		return false;
+	if (this->isNegative() && x.isNegative()){
+		QInt One("1");
+		x = ~(x - One); //doi ve so duong
+		*this = ~(*this - One);
+		if (this != &x)
 		{
-			if (this->m_Data[i] > x.m_Data[i])
-				return false;
+			for (int i = 0; i < x.size(); i++)
+			{
+				if (this->m_Data[i] < x.m_Data[i])
+					return false;
+			}
 		}
+		return true;
 	}
-	return true;
+
+	if (!this->isNegative() && !x.isNegative()) {
+		if (this != &x)
+		{
+			for (int i = 0; i < x.size(); i++)
+			{
+				if (this->m_Data[i] > x.m_Data[i])
+					return false;
+			}
+		}
+		return true;
+	}
 }
 //Toán tử >.
 bool  QInt::operator > (QInt x) {
