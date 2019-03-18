@@ -30,7 +30,7 @@ public:
 	//Hàm lấy size
 	int size();
 
-	//---------------------------------NHÓM TOÁN TỬ VÀ PHÉP TOÁN SỐ HỌC---------------------------------
+
 	//Toán tử gán =.
 	QInt operator = (QInt);
 	//Toán tử +.
@@ -53,31 +53,10 @@ public:
 	//Toán tử /.
 	bool operator <= (QInt);
 
-	
-	
 
-	//---------------------------------NHÓM TOÁN TỬ VÀ PHÉP TOÁN THAO TÁC TRÊN BIT---------------------------------
-	//Phép toán dịch phải(Shift Right).
-	QInt operator >> (const int&);
-	//Phép toán dịch trái(Shift Left).
-	QInt operator << (const int&);
-	//Phép toán &.
-	QInt operator & (const QInt&) const;
-	//Phép toán |.
-	QInt operator | (const QInt&) const;
-	//Phép toán ^.
-	QInt operator ^	(const QInt&) const;
-	//Phép toán ~.
-	QInt& operator ~ ();
-	//Phép toán xoay trái.
-	QInt& RoL();
-	//Phép toán xoay trái.
-	QInt& RoR();
-
-	//---------------------------------NHÓM HÀM KIỂM TRA---------------------------------
 	//Hàm kiếm tra bằng không.
 	bool isEqualZero();
 	//Hàm kiểm tra số âm.
 	bool isNegative();
 };
-#endif#pragma once
+#endif
