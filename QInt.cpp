@@ -215,3 +215,28 @@ bool  QInt::operator >= (QInt x) {
 bool  QInt::operator <= (QInt x ) {
 	return (*this < x || *this == x);
 }
+
+//Hàm kiếm tra bằng không.
+bool QInt::isEqualZero()
+{
+	for (int i = 0; i < this->size(); i++)
+	{
+		if (this->m_Data[i] != 0)
+		{
+			return false;
+		}
+	}
+
+	return true;
+}
+
+//Hàm kiểm tra số âm.
+bool QInt::isNegative()
+{
+	if ((this->m_Data[this->size() - 1] & (1 << (_SIZE_INT_ - 1))) >> (_SIZE_INT_ - 1) == 1)
+	{
+		return true;
+	}
+
+	return false;
+}
