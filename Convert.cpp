@@ -307,7 +307,9 @@ string Convert::StrBintoHex(string Str)
 //Hàm chuyển số QInt sang số bù 2.
 QInt Convert::QInttoTwosComplement(QInt x)
 {
-	return (~x + QInt("1"));
+	x = ~x;
+	x = x + QInt("1");
+	return x ;
 }
 
 //Hàm chuyển QInt sang chuỗi nhị phân.
