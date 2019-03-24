@@ -78,7 +78,7 @@ QInt QInt::operator * (QInt x) const
 		Temp = Temp << 1; //nhan temp cho 2;
 		x = x >> 1; //chia x cho 2.
 	}
-
+	Result = Temp;
 	// neu 2 so trai dau
 	if (Negative == true)
 	{
