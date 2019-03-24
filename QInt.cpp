@@ -88,7 +88,8 @@ QInt QInt::operator * (QInt x) const
 	// neu 2 so trai dau
 	if (Negative == true)
 	{
-		Result = ~Result + One; //chuyet ket qua ve dang bu 2.
+		Result = ~Result;
+		Result = Result + One; //chuyet ket qua ve dang bu 2.
 	}
 
 	return Result;
@@ -96,7 +97,9 @@ QInt QInt::operator * (QInt x) const
 // toan tu /
 QInt QInt::operator / (QInt x)
 {
-	QInt Result;
+	QInt QInt::operator / (QInt x)
+{
+	QInt Result("0");
 
 	if (this->isEqualZero() || x.isEqualZero()) // kiem tra kq va x co bang 0 khong
 	{
@@ -113,7 +116,7 @@ QInt QInt::operator / (QInt x)
 		else
 		{
 			QInt Temp = *this;
-			int k = _DEFAULT_SIZE;
+			int k = 16;
 			bool Negative = false;
 
 			if ((Temp.isNegative() && !x.isNegative()) || (!Temp.isNegative() && x.isNegative()))//neu 2 so trai dau
@@ -133,7 +136,7 @@ QInt QInt::operator / (QInt x)
 			while (k > 0)
 			{
 				Result = Result << 1;
-				Result.m_Data[0] = Result.m_Data[0] | ((Temp.m_Data[Result.size() - 1] & (1 << (_SIZE_INT_ - 1))) >> (_SIZE_INT_ - 1));
+				Result.Data[0] = Result.Data[0] | ((Temp.Data[3] & (1 >> 31)) << 31);
 				Temp = Temp << 1;
 
 				Result = Result - x;
@@ -143,7 +146,7 @@ QInt QInt::operator / (QInt x)
 				}
 				else
 				{
-					Temp.m_Data[0] = Temp.m_Data[0] | 1;
+					Temp.Data[0] = Temp.Data[0] | 1;
 				}
 
 				--k;
@@ -152,12 +155,15 @@ QInt QInt::operator / (QInt x)
 			Result = Temp;
 			if (Negative == true)
 			{
-				Result = ~Result + One;
+				Result = ~Result;
+				Result = Result + One;
 			}
 		}
 	}
 
 	return Result;
+}
+
 }
 
 //toan tu +.
